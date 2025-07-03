@@ -60,4 +60,7 @@ def make_pdf(report: dict) -> bytes:
     pdf.cell(0, 12, f"Scan time: {report.get('scan_time',0)} s", ln=1)
 
     # Return bytes for Streamlit download_button
-    return pdf.output(dest="S").encode("latin-1")
+    raw = pdf.output(dest="S")
+    pdf_bytes = raw.encode("latin-1") if isinstance(raw, str) else raw
+    return pdf_bytes
+
