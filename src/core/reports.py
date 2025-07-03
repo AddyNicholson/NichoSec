@@ -42,12 +42,17 @@ def make_pdf(report: dict) -> bytes:
     pdf.ln(12)
     pdf.set_text_color(0,0,0)
 
-    # ── Reasons ────────────────────────────────────────────
+    # ...
+# --- Reasons ----------------------------------------------------------
     pdf.set_font("DejaVu", "", 12)
     pdf.cell(0, 16, "Reasons:", ln=1)
+
+    max_w = pdf.w - pdf.l_margin - pdf.r_margin         # full line width
+
     for r in report.get("reasons", []):
-        pdf.multi_cell(0, 14, _safe(f"• {r}"))
+        pdf.multi_cell(max_w, 14, _safe(f"- {r}"), ln=1)   # use max_w instead of 0
     pdf.ln(8)
+# ...
 
     # ── IPs ────────────────────────────────────────────────
     pdf.cell(0, 16, "IPs:", ln=1)
