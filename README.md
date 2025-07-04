@@ -22,8 +22,11 @@ Built in **Python** with **Streamlit**, it runs completely **offline** (no cloud
 ## 📸 Screenshots
 
 > _Add screenshots of the UI, scan results, and PDF report here_
+![Screenshot 2025-07-04 204730](https://github.com/user-attachments/assets/788c4bda-5048-4b10-bf22-a304bee5772e)
 
----
+
+![Screenshot 2025-07-04 204833](https://github.com/user-attachments/assets/10fde6be-7c79-437c-9927-3d6dd3af3658)
+
 
 ## 📂 Tech Stack
 
