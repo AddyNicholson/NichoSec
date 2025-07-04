@@ -405,21 +405,25 @@ def show_scan_ui():
             </div>
         </div>
         """, unsafe_allow_html=True)
-         
-         
-         # ⬇️  PDF DOWNLOAD BUTTON  (add these 6 lines)
-        pdf_bytes = make_pdf(threat)            # helper defined once at top
-        st.download_button(
-            "⬇️ Download PDF report",
-            data=pdf_bytes,
-            file_name=f"{level}_{time.strftime('%Y%m%d_%H%M%S')}.pdf",
-            mime="application/pdf",
-        )
+       # ⬇️ PDF DOWNLOAD BUTTON --------------------------------------
+        try:
+            pdf_bytes = make_pdf(threat)
+            if not isinstance(pdf_bytes, (bytes, bytearray)):
+                raise TypeError("PDF data is not valid binary")
+
+            st.download_button(
+                "⬇️ Download PDF report",
+                data=pdf_bytes,
+                file_name=f"{level}_{time.strftime('%Y%m%d_%H%M%S')}.pdf",
+                mime="application/pdf",
+            )
+        except Exception as e:
+            st.error(f"PDF generation failed: {e}")
 
         # 👉 Raw JSON behind an expander
         with st.expander("📑 Full raw JSON"):
             st.json(threat)
-
+       
         # Purged text download
         if purge_on and "cleaned" in threat:
             st.download_button(
